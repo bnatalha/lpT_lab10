@@ -28,7 +28,7 @@ void try_push(edb1::myFila<T>& test, const char queue_name, const T element);
 */
 void testar_fila()
 {
-	// Criando opilha vazia
+	// Criando pilha vazia
 	cout << "Criando fila A (vazia)...";
 	edb1::myFila<int> A;
 	cout << "Pronto." << endl;
@@ -38,9 +38,9 @@ void testar_fila()
 	try_front_back(A,'A');
 	try_pop(A,'A');
 
-	cout << "Pushing A..." << endl;
+	cout << "Pushing A... ======================================" << endl;
 	//for (int i = 1; i < 4; i++)
-	for (int i = 1; i <3; i++)
+	for (int i = 0; i < 21; i++)
 	{	
 		try_push(A,'A',i);
 		test_size_empty(A,'A');
@@ -48,12 +48,12 @@ void testar_fila()
 		cout << "--" << endl;
 	}
 	cout << endl;
-
+/*
 	cout << "Criando fila B de A(1 elemento)...";
 	edb1::myFila<int> B(A);
-	cout << "Pronto." << endl;
+	cout << "Pronto.======================================" << endl;
 
-	cout << "Testando B..." << endl;
+	cout << "Testando B...======================================" << endl;
 	test_size_empty(B,'B');
 	try_front_back(B,'B');
 	try_pop(B,'B');
@@ -61,8 +61,8 @@ void testar_fila()
 	try_front_back(B,'B');
 	cout << endl;
 
-	cout << "Popping A..." << endl;
-	for (int i = 1; i < 3; i++)
+	cout << "Popping A...======================================" << endl;
+	for (int i = 1; i < 24; i++)
 	{	
 		try_pop(A,'A');
 		test_size_empty(A,'A');
@@ -71,7 +71,7 @@ void testar_fila()
 	}
 	cout << endl;
 
-	cout << "Pushing A..." << endl;
+	cout << "Pushing A...======================================" << endl;
 	for (int i = 7; i < 9; i++)
 	{	
 		try_push(A,'A',i);
@@ -83,19 +83,19 @@ void testar_fila()
 
 	cout << "Criando Fila C de A...";
 	edb1::myFila<int> C(A);
-	cout << "Pronto." << endl;
+	cout << "Pronto.======================================" << endl;
 
 	cout << "Limpando A...";
 	while (A.empty() == false) A.pop();
-	cout << "Pronto." << endl;
+	cout << "Pronto.======================================" << endl;
 
-	cout << "Testando C:" << endl;
+	cout << "Testando C:======================================" << endl;
 	test_size_empty(C,'C');
 	try_front_back(C,'C');
 	try_pop(C,'C');
 	test_size_empty(C,'C');
 	try_front_back(C,'C');
-	
+	*/
 }
 
 /**

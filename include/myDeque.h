@@ -78,7 +78,6 @@ namespace edb1
 	*/
 	template <typename T>
 	myDeque<T>::myDeque( myDeque & orig )	: capacidade(orig.capacidade)
-	//myDeque<T>::myDeque( myDeque & orig )	: capacidade(orig.capacidade), ini(orig.ini), fim(orig.fim)
 	{
 		// tenta alocar o Deque com a capacidade do deque 'orig'.
 		try{

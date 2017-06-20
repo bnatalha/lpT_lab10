@@ -17,6 +17,88 @@ namespace edb1
 	// Implementações de myFila
 
 	/**
+	* @brief Realoca o container do deque para o dobro de sua capacidade total
+	*/
+	template <typename T>
+	void myFila<T>::my_reallocator()
+	{
+		bool is_empty = empty();	// guarda se o deuque está vazio ou não
+
+		T* new_fila;	// ponteiro para o novo fila;
+
+		// tenta alocar o dobro da capacidade do deque atual
+		try{
+			new_fila = new T[capacidade*2];	// cria um novo fila com o dobro de capacidade
+		}catch (std::bad_alloc& ba)		{
+			cout << "bad_alloc caught: " << ba.what() << endl;
+		}
+		
+		int new_fim = 0;
+		for (int i = ini; new_fim < size(); new_fim++)	// atribui ao novo bloco de memoria informações do atual
+		{
+			new_fila[new_fim] = fila[i];
+			//cout << fila[i] << " ";
+			i = ((i+1) % capacidade);
+		}
+
+		// fixa indices 
+		ini = ( is_empty? -1 : 0 );
+		fim = ( is_empty? -1 : new_fim-1 );
+
+		delete[] fila;	// Deleta bloco de memoria apontado por 'fila' (antigo)
+		fila = new_fila;	// aponta 'fila' para o bloco de memoria criado
+		capacidade = capacidade*2;	// dobra 'capacidade'
+	}
+
+	// =================================================================================================
+	// =========================================== Construtores ========================================
+	// =================================================================================================
+
+	/**
+	* @brief Constroi um objeto myFila sem passar atributos.
+	*/
+	template <typename T>
+	myFila<T>::myFila()	: capacidade(20), ini(-1), fim(-1)
+	{
+		// tenta alocar o container da fila
+		try{
+			fila = new T[capacidade];
+		}catch (std::bad_alloc& ba)		{
+			cout << "bad_alloc caught: " << ba.what() << endl;
+		}
+	}
+
+	/**
+	* @brief Constroi um objeto myFila  partir de uma fila já definida pelo usuário
+	* @param orig myFila já existente que será sada pra construir a atual
+	*/
+	template <typename T>
+	myFila<T>::myFila(const myFila &orig)	: capacidade(orig.capacidade), ini(orig.ini), fim(orig.fim)
+	{
+		for (int i = 0; i < capacidade; ++i)
+		{
+			this->fila[i] = orig.fila[i];	// Copia elementos da fila passada por argumento para a fila a ser criada
+		}
+		
+	}
+
+	// ========================================= Destrutor =============================================
+
+	/**
+	* @brief Desaloca 'fila' após chamar o destrutor de seus respectivos elementos
+	*/
+	template <typename T>
+	myFila<T>::~myFila()
+	{
+		delete[] fila;
+	}
+
+	// =================================================================================================
+	// ======================================== Capacidade =============================================
+	// =================================================================================================
+
+
+	/**
 	* @retval true A fila está vazia
 	* @retval false A fila \b não está vazia
 	*/
@@ -38,6 +120,11 @@ namespace edb1
 		//else if (ini > fim)
 		return ( (fim + (capacidade - ini) )+ 1);
 	}
+
+	// =================================================================================================
+	// =========================================== Acesso ==============================================
+	// =================================================================================================
+
 
 	/**
 	* @return Referência para o elemento na frente da fila
@@ -65,15 +152,17 @@ namespace edb1
 		return fila[fim];
 	}
 
+	// =================================================================================================
+	// ======================================= Modificadores ===========================================
+	// =================================================================================================
+
 	/**
 	* @param element Elemento do tipo T a ser acrescentado na frente da fila
 	*/
 	template <typename T >
 	void myFila<T>::push(const T& element)
 	{
-		if(size() == capacidade)
-			throw std::length_error ("[EXCEPTION] push(): A capacidade máxima da fila (fixa em 50) já foi atingida.");
-		
+		if(size() == capacidade)	my_reallocator();
 
 		if (empty())	// se for o primeiro elemento a entrar na fila
 			ini++;	// coloca 'ini' para apontar

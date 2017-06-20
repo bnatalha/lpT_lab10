@@ -267,42 +267,20 @@ namespace edb1
 	{
 		private:
 
-			static const int capacidade = 3;	/**< Capacidade padrão de todas as filas */
-			//int tamanho;	/**< Quantitade de elementos na fila */
+			int capacidade;	/**< Capacidade máxima do container da fila (inicialmente fixa em 20) */
 			int ini;	/**< Índice do elemento na frente da fila */
 			int fim;	/**< Índice do elemento no fim da fila */
 			T *fila = NULL;	/**< Arranjo que será alocado dinamicamente para guardar os elementos da fila */
 
+			void my_reallocator();
+
 		public:
 
-			/**
-			* @brief Constroi um objeto myFila sem passar atributos.
-			*/
-			myFila()
-				: ini(-1), fim(-1), fila(new T[capacidade])
-			{}
-
-			/**
-			* @brief Constroi um objeto myFila  partir de uma fila já definida pelo usuário
-			* @param my_queue myFila já existente que será sada pra construir a atual
-			*/
-			myFila(const myFila &my_queue)
-				: ini(my_queue.ini), fim(my_queue.fim), fila(new T[capacidade])
-			{
-				for (int i = 0; i < capacidade; ++i)
-				{
-					this->fila[i] = my_queue.fila[i];	// Copia elementos da fila passada por argumento para a fila a ser criada
-				}
-				
-			}
-
-			/**
-			* @brief Desaloca 'fila' após chamar o destrutor de seus respectivos elementos
-			*/
-			~myFila()
-			{
-				delete[] fila;
-			}
+			//Construtores
+			myFila();
+			myFila(const myFila &orig);
+			// Destrutor
+			~myFila();
 
 			// Metodos
 
