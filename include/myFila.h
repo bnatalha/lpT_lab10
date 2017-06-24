@@ -73,12 +73,28 @@ namespace edb1
 	* @param orig myFila já existente que será sada pra construir a atual
 	*/
 	template <typename T>
-	myFila<T>::myFila(const myFila &orig)	: capacidade(orig.capacidade), ini(orig.ini), fim(orig.fim)
+	myFila<T>::myFila(myFila &orig)	: capacidade(orig.capacidade), ini(orig.ini), fim(orig.fim)
 	{
-		for (int i = 0; i < capacidade; ++i)
-		{
-			this->fila[i] = orig.fila[i];	// Copia elementos da fila passada por argumento para a fila a ser criada
+		
+		// Tenta alocar a fila
+		try{
+			fila = new T[capacidade];
+		}catch(std::exception &e){
+			cout << e.what() << endl;
 		}
+
+		// copia os elementos de orig para esta fila
+		for(int i = 0, orig_i = ini;
+			i < orig.size();	// enquanto 'i' for menor que a capacidade de 'orig'
+			i++ )
+		{
+			fila[i] = orig.fila[orig_i];	// atribui (do inicio desta fila) os elementos da fila 'orig' respeitando sua ordem
+			orig_i = (orig_i+1) % orig.capacidade;	// avança o indice da fila 'orig'
+		}
+		
+		// fixa índices
+		ini = (orig.empty()? -1 : 0);
+		fim = orig.size()-1;
 		
 	}
 
@@ -188,6 +204,34 @@ namespace edb1
 		else
 			ini = (ini+1)%capacidade;	// avança indice 'ini'
 		
+	}
+
+	// =================================================================================================
+	// ============================= Sobrecarga de Operadores Relacionais ==============================
+	// =================================================================================================
+
+	/**
+	* @param f_dir Objeto my Fila que vai ser comparado com o que chamou esta função
+	*/
+	template <typename T >
+	bool myFila<T>::operator== ( myFila<T>& f_dir)
+	{
+		if (size() == f_dir.size())	// Se tiverem tamanhos iguais
+		{
+			// compara os elementos das filas
+			for(int ori = ini, dir = f_dir.ini, count = 0;
+				count < size();	// percorre toda a lista
+				count++ )
+			{
+				if(fila[ori] != f_dir.fila[dir] ) return false;	// encountrou um elemento que difere
+				ori = (ori+1) % capacidade;	// avança o indice 'ori'
+				dir = (dir+1) % f_dir.capacidade;	// avança o indice 'dir'
+			}
+
+			return true; 	// nenhuma comparação entre as filas encontrou elementos diferentes
+		}
+
+		return false;	// as filas tem tamanhos diferentes
 	}
 }
 

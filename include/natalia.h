@@ -278,7 +278,7 @@ namespace edb1
 
 			//Construtores
 			myFila();
-			myFila(const myFila &orig);
+			myFila(myFila &orig);
 			// Destrutor
 			~myFila();
 
@@ -290,6 +290,7 @@ namespace edb1
 			T& back();	/**< Retorna uma referência para elemento no fim da fila */
 			void push(const T& element);	/**< Acrescenta um elemento na frente da fila, aumentando o tamanho da fila */
 			void pop();	/**< Remove o elemento na frente da fila, diminuindo o tamanho da fila */
+			bool operator== ( myFila<T>& f_dir); /**< Retorna se uma fila é igual a outra */
 	};
 
 	/**

@@ -14,6 +14,11 @@
 #include "testar_pilha.h"
 #include "testar_deque.h"
 
+
+/**
+* @brief Solicita ao usuário se ele deseja proceder com um determinado teste do namespace edb1;
+* @param testname Nome da estrutura/classe/algoritmo que será testado
+*/
 bool proceder(const char* testname)
 {
 	char answer = 'x';
@@ -39,12 +44,12 @@ int main(int argc, char const *argv[])
 	cout << "Testando TADS:" << endl;
 	cout << "--------------------------------------------------------------------------------" << endl;
 	cout << "--------------------------------------------------------------------------------" << endl;
-	if( proceder("myLista") )
-	{
+//	if( proceder("myLista") )
+//	{
 		cout << "================ myLista =================" << endl;
 		testar_lista();
 		cout << "=======================================fim" << endl;
-	}
+/*	}
 	if( proceder("myPilha") )
 	{
 		cout << "================ myPilha =================" << endl;
@@ -73,7 +78,7 @@ int main(int argc, char const *argv[])
 		cout << "--------------------------------------------------------------------------------" << endl;
 		testar_ordenacao();
 	}
-	cout << "--------------------------------------------------------------------------------" << endl;
+*/	cout << "--------------------------------------------------------------------------------" << endl;
 	cout << "----------------------------------------FIM-------------------------------------" << endl << endl;
 	
 	cout << "Saindo do programa de testes..." << endl;
