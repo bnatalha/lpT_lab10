@@ -27,7 +27,7 @@ void testar_lista()
 	edb1::myLista<int> D;
 
 	// preenchendo listas
-	cout << "Preenchendo listas para testes"
+	cout << "Preenchendo listas para testes..." << endl;
 	for (int i = 0; i <= 10; ++i)
 	{
 		A.push_back(i);
