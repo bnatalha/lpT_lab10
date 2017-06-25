@@ -48,43 +48,20 @@ namespace edb1
 	{
 		private:
 
-			static const int capacidade = 2;	/**< Capacidade padrão de todas as pilhas */
+			int capacidade = 20;	/**< Capacidade inicial da pilha */
 			int tamanho;	/**< Quantitade de elementos na pilha */
 			T *pilha = NULL;	/**< Arranjo que será alocado dinamicamente para guardar os elementos da pilha */
 
+			void my_reallocator();
+
 		public:
 
-			/**
-			* @brief Constroi um objeto myPilha sem passar atributos.
-			*/
-			myPilha()
-				: tamanho(0), pilha(new T[capacidade])
-			{} // EXTRA!: tratamento de exceção na alocação dinâmica ()
-
-			/**
-			* @brief Constroi um objeto myPilha  partir de uma pilha já definida pelo usuário
-			* @param my_stack myPilha já existente que será sada pra construir a atual
-			*/
-			myPilha(const myPilha &my_stack)
-				: tamanho(my_stack.tamanho), pilha(new T[capacidade])
-			{
-				for (int i = 0; i < capacidade; ++i)
-				{
-					this->pilha[i] = my_stack.pilha[i];	// Copia elementos da pilha passada por argumento para a pilha a ser criada
-				}
-				
-			}
-
-			/**
-			* @brief Desaloca 'pilha' após chamar o destrutor de seus respectivos elementos
-			*/
-			~myPilha()
-			{
-				delete[] pilha;
-			}
-
+			//Construtores
+			myPilha();			
+			myPilha(const myPilha &my_stack);
+			// Destrutor
+			~myPilha();
 			// Metodos
-
 			bool empty();	/**< Verifica se a pilha está vazia */
 			int& size();	/**< Retorna uma referência para o tamanho da pilha */
 			T& top();	/**< Retorna uma referência para elemento no topo da pilha */
@@ -233,10 +210,10 @@ namespace edb1
 			// Modificadores
 			//void push_sorted(const T& elem );
 			void push_sorted( T elem );
-			void push_back( const T& elem );	// bool se tiver como checar se pode ser alocado ou não
-			bool pop_back();
+			void push_back( const T& elem );
+			void pop_back();
 			void push_front( const T& elem );
-			bool pop_front();
+			void pop_front();
 			void clear();
 			void erase( iterator &it );
 			//insert()	iterator

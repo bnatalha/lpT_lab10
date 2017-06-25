@@ -44,18 +44,18 @@ int main(int argc, char const *argv[])
 	cout << "Testando TADS:" << endl;
 	cout << "--------------------------------------------------------------------------------" << endl;
 	cout << "--------------------------------------------------------------------------------" << endl;
-//	if( proceder("myLista") )
-//	{
+/*	if( proceder("myLista") )
+	{
 		cout << "================ myLista =================" << endl;
 		testar_lista();
 		cout << "=======================================fim" << endl;
-/*	}
+	}
 	if( proceder("myPilha") )
 	{
-		cout << "================ myPilha =================" << endl;
+*/		cout << "================ myPilha =================" << endl;
 		testar_pilha();
 		cout << "=======================================fim" << endl;
-	}
+/*	}
 	if( proceder("myFila") )
 	{
 		cout << "================ myFila ==================" << endl;

@@ -380,7 +380,10 @@ namespace edb1
 	template < typename T>
 	T& myLista<T>::front()
 	{
-		// exceção caso lista esteja vazia (?)
+		// exceção caso lista esteja vazia
+		if(empty())
+			throw std::out_of_range ("[EXCEPTION] front(): Não há elementos na lista");
+
 		return (sentinela_head->elemento);
 	}
 
@@ -391,7 +394,9 @@ namespace edb1
 	template < typename T>
 	T& myLista<T>::back()
 	{
-		// exceção caso lista esteja vazia (?)
+		if(empty())
+			throw std::out_of_range ("[EXCEPTION] back(): Não há elementos na lista");
+
 		return (sentinela_tail->elemento);
 	}
 
@@ -439,10 +444,16 @@ namespace edb1
 	* @param elem Elemento a ser adicionado ao início da lista
 	*/
 	template < typename T>
-	//void myLista<T>::push_sorted( const T& elem )
 	void myLista<T>::push_sorted( T elem )
 	{
-		myNode *new_node = new myNode(elem);	// Cria um novo nó dinamicamente com o elemento a ser adicionado
+		myNode *new_node;
+
+		//tenta alocar um novo nó
+		try	{
+			new_node = new myNode(elem);	// Cria um novo nó dinamicamente com o elemento a ser adicionado
+		}catch (std::bad_alloc& ba)		{
+			cout << "bad_alloc caught: " << ba.what() << endl;
+		}
 
 		if ( empty() )	 // Se for o primeiro nó da lista (sentinelas não contam)
 		{
@@ -493,7 +504,13 @@ namespace edb1
 	template < typename T>
 	void myLista<T>::push_back( const T& elem )
 	{
-		myNode *new_node = new myNode(elem, sentinela_tail);	// Cria um novo nó dinamicamente com o elemento adicionado, com o anterior dele sendo o último atual (apontado pela cauda)
+		myNode *new_node;
+		//tenta alocar um novo nó
+		try	{
+			new_node = new myNode(elem, sentinela_tail);	// Cria um novo nó dinamicamente com o elemento adicionado, com o anterior dele sendo o último atual (apontado pela cauda)
+		}catch (std::bad_alloc& ba)		{
+			cout << "bad_alloc caught: " << ba.what() << endl;
+		}
 
 		if ( empty() ) // Se for o primeiro nó da lista (sentinelas não contam)
 			sentinela_head = new_node;	// O nó criado agora é o primeiro da lista	
@@ -508,17 +525,12 @@ namespace edb1
 
 	/**
 	* @brief Remove um elemento do fim da lista, se está não estiver vazia
-	* @retval true Se um elemento foi retirado
-	* @retval false Se a lista for vazia
 	*/
 	template < typename T>
-	bool myLista<T>::pop_back()
+	void myLista<T>::pop_back()
 	{
-		if ( size() == 0 )
-		{
-			cout << "pop_back(): A Lista está vazia." << endl;	// ou cout?
-			return false;
-		}
+		if (empty())
+			throw std::length_error ("[EXCEPTION] pop_back(): Não pode remover elementos de uma lista vazia");
 
 		myNode *_destruir = sentinela_tail;	// Atribui o endereço apontado pela cauda a um ponteiro
 		sentinela_tail = sentinela_tail->anterior;	// A cauda agora aponta para o *penúltimo* nó (ou null, se tamanho da lista for 1)
@@ -533,8 +545,6 @@ namespace edb1
 		delete _destruir;	// Deleta o elemento que era o último da lista
 
 		qtd_elementos--;	// Total de elementos da lista diminui
-
-		return true;	
 	}
 
 	/**
@@ -544,7 +554,14 @@ namespace edb1
 	template < typename T>
 	void myLista<T>::push_front( const T& elem )
 	{
-		myNode *new_node = new myNode(elem, NULL, sentinela_head);	// Cria um novo nó dinamicamente com o elemento adicionado, com o próximo dele sendo o primeiro atual (apontado pela cabeça)
+		myNode *new_node;
+
+		//tenta alocar um novo nó
+		try	{
+			new_node = new myNode(elem, NULL, sentinela_head);	// Cria um novo nó dinamicamente com o elemento adicionado, com o próximo dele sendo o primeiro atual (apontado pela cabeça)
+		}catch (std::bad_alloc& ba)		{
+			cout << "bad_alloc caught: " << ba.what() << endl;
+		}
 
 		if ( empty() ) // Se for o primeiro nó da lista (sentinelas não contam)
 			sentinela_tail = new_node;	// O nó criado agora é o primeiro da lista	
@@ -563,13 +580,11 @@ namespace edb1
 	* @retval false Se a lista for vazia
 	*/
 	template < typename T>
-	bool myLista<T>::pop_front()
+	void myLista<T>::pop_front()
 	{
-		if ( size() == 0 )
-		{
-			cout << "pop_front(): A Lista está vazia." << endl;	// ou cerr?
-			return false;
-		}
+		if (empty())
+			throw std::length_error ("[EXCEPTION] pop_back(): Não pode remover elementos de uma lista vazia");
+
 		myNode *_destruir = sentinela_head;	// Atribui o endereço apontado pela cabeça a um ponteiro
 		sentinela_head = sentinela_head->proximo;	// A cabeça agora aponta para o *segundo* nó (ou null, se tamanho da lista for 1)
 
@@ -581,9 +596,7 @@ namespace edb1
 		
 		delete _destruir;	// Deleta o elemento que era o primeiro da lista
 
-		qtd_elementos--;	// Total de elementos da lista diminui
-
-		return true;	
+		qtd_elementos--;	// Total de elementos da lista diminui	
 	}
 
 	// ====================================================================================================
@@ -790,7 +803,6 @@ namespace edb1
 		// *Tem que avançar o fast antes de destruir o nó para onde ele ta apontado
 
 	}
-
 }
 
 #endif

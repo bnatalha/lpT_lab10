@@ -34,6 +34,8 @@ void testar_pilha()
 	cout << "Pronto." << endl;
 
 	// Testes com pilhas vazias
+	cout << "------------------------------------------------------------------" << endl;
+	cout << "Iniciando testes com pilhas vazias..." << endl;
 	test_size_empty(A,'A');
 	try_top(A,'A');	
 	try_pop(A,'A');	
@@ -42,12 +44,12 @@ void testar_pilha()
 	// Testando push
 	cout << "Pushing A..." << endl;
 
-	for(int i = 1; i < 4; i++)
+	for(int i = 1; i <= 21; i++)
 	{
 		try_push(A,'A',i);
 		try_top(A,'A');
 		test_size_empty(A,'A');
-		cout << "--" << endl;
+		cout << endl << "--" << endl;
 	}
 	cout << endl;
 
@@ -63,7 +65,7 @@ void testar_pilha()
 		test_size_empty(C,'C');
 		try_top(C,'C');	
 		try_pop(C,'C');
-		cout << "--" << endl;
+		cout << endl << "--" << endl;
 	}
 
 	test_size_empty(C,'C');
@@ -81,7 +83,7 @@ template <typename T >
 void test_size_empty(edb1::myPilha<T>& test, const char queue_name)
 {
 	cout << queue_name << ".size(): " << test.size() << "\t";
-	cout << "'" << queue_name <<"'" << (test.empty()? "":" não") << " está vazia." << endl;
+	cout << "'" << queue_name <<"'" << (test.empty()? "":" não") << " está vazia. ";
 }
 
 /**
@@ -95,7 +97,7 @@ void try_top(edb1::myPilha<T>& test, const char queue_name)
 {
 	// tenta acessar elemento da frente da fila
 	try	{
-		cout << queue_name << ".top(): " << test.top() << endl;
+		cout << queue_name << ".top(): " << test.top() << " ";;
 	}
 	catch (std::exception &e){
 		cout << e.what() << endl;
@@ -112,7 +114,7 @@ void try_pop(edb1::myPilha<T>& test, const char queue_name)
 {
 	// tenta remover o elemento mais velho da fila
 	try	{
-		cout << queue_name << ".pop();" << endl;
+		cout << queue_name << ".pop(); ";
 		test.pop();
 	}
 	catch (std::exception &e){
@@ -131,7 +133,7 @@ void try_push(edb1::myPilha<T>& test, const char queue_name, const T element)
 {
 	// tenta colocar um elemento ao fim da fila
 	try	{
-		cout << queue_name << ".push("<< element << ");" << endl;
+		cout << queue_name << ".push("<< element << "); ";
 		test.push(element);
 	}
 	catch (std::exception &e){
