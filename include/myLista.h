@@ -745,7 +745,6 @@ namespace edb1
 
 	/**
 	* @brief Tira da lista seus elementos repetidos
-	* @param elem Valor buscado para ser removido
 	*/
 	template < typename T>
 	void myLista<T>::unique()

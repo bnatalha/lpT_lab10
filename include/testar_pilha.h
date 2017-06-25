@@ -24,13 +24,13 @@ template <typename T >
 void try_push(edb1::myPilha<T>& test, const char queue_name, const T element);
 
 /**
-* @brief Realiza testes com objetoss da classe myPilha
+* @brief Realiza testes com objetos da classe myPilha
 */
 void testar_pilha()
 {
 	// Criando pilhas
 	cout << "Criando pilha A<int>..."; 
-	edb1::myPilha<int> A;	// capacidade: padrão (2)
+	edb1::myPilha<int> A;	// capacidade: padrão (20)
 	cout << "Pronto." << endl;
 
 	// Testes com pilhas vazias

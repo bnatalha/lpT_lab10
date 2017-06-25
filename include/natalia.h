@@ -48,7 +48,7 @@ namespace edb1
 	{
 		private:
 
-			int capacidade = 20;	/**< Capacidade inicial da pilha */
+			int capacidade;	/**< Capacidade inicial da pilha */
 			int tamanho;	/**< Quantitade de elementos na pilha */
 			T *pilha = NULL;	/**< Arranjo que será alocado dinamicamente para guardar os elementos da pilha */
 

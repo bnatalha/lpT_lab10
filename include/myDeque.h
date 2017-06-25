@@ -74,7 +74,7 @@ namespace edb1
 
 	/**
 	* @brief Constrói um objeto myDeque a partir de outro já existente (cópia)
-	* @param objeto myDeque que será usado como referência para ser copiado
+	* @param orig myDeque que será usado como referência para ser copiado
 	*/
 	template <typename T>
 	myDeque<T>::myDeque( myDeque & orig )	: capacidade(orig.capacidade)
@@ -123,7 +123,6 @@ namespace edb1
 	/**
 	* @brief diferença desse pro [] é a esceção caso 'n' seja maior ou igual ao tamanho do deque
 	* @return Referência para o elemento na posição 'n' no deque, se existir.
-	*
 	*/
 	template <typename T>
 	T& myDeque<T>::at(int n)
@@ -194,7 +193,7 @@ namespace edb1
 
 	/**
 	* @brief Acrescenta um elemento no final do Deque
-	* @param element Elemento do tipo T a ser acrescentado ao deque
+	* @param elem Elemento do tipo T a ser acrescentado ao deque
 	*/
 	template <typename T>
 	void myDeque<T>::push_back( const T& elem )
@@ -232,7 +231,7 @@ namespace edb1
 
 	/**
 	* @brief Acrescenta um elemento no início do Deque
-	* @param element Elemento do tipo T a ser acrescentado ao deque
+	* @param elem Elemento do tipo T a ser acrescentado ao deque
 	*/
 	template <typename T>
 	void myDeque<T>::push_front( const T& elem )
@@ -291,21 +290,21 @@ namespace edb1
 	* @return 'true' se forem iguais, 'false' caso contrário
 	*/
 	template <typename T>
-	bool myDeque<T>::operator== ( myDeque<T>& d_direita)
+	bool myDeque<T>::operator== ( myDeque<T>& orig)
 	{
-		if(size() == d_direita.size())
+		if(size() == orig.size())
 		{
 			// cria indices para comparação
-			int i = ini, dir_i = d_direita.ini;
+			int i = ini, dir_i = orig.ini;
 
 			// checa cada elemento das listas, se estão na mesma ordem.
 			for(auto count = 0; count < size(); count++ )
 			{
-				if( recipiente[i] != d_direita.recipiente[dir_i] ) return false;	// achou elementos diferentes
+				if( recipiente[i] != orig.recipiente[dir_i] ) return false;	// achou elementos diferentes
 				
 				// incrementa indices
 				i = (i+1)%capacidade;
-				dir_i = (dir_i+1)%d_direita.capacidade;
+				dir_i = (dir_i+1)%orig.capacidade;
 			}
 			return true;	// não achou nenhum elemento diferente
 		}

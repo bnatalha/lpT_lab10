@@ -57,7 +57,7 @@ namespace edb1
 	/**
 	* @brief Simula o insertion sort, ordenando um array de int o deixando crescente.
 	* @param v arranjo de initeiros que receberá a ordenação
-	* @param ini_plus1 posição inicial do arranjo + 1
+	* @param ini posição inicial do arranjo
 	* @param fim posição final do arranjo
 	*/
 	void myInsertSort (int *v, int ini, int fim){ //Insert na head
@@ -121,9 +121,9 @@ namespace edb1
 
 	/**
 	* @brief Simula o merge sort, que faz um arranjo ordenado de dois arranjos ordenados
-	* @oaram dir um dos arranjos que será usado para fazer o arranjo ordenado (o da dierita)
+	* @param dir um dos arranjos que será usado para fazer o arranjo ordenado (o da dierita)
 	* @param d_size tamanho de 'dir'
-	* @oaram esq um dos arranjos que será usado para fazer o arranjo ordenado (o da esquerda)
+	* @param esq um dos arranjos que será usado para fazer o arranjo ordenado (o da esquerda)
 	* @param e_size tamanho de 'esq'
 	* @param v arranjo de initeiros que receberá a ordenação
 	* @param v_size tamanho do arranjo 'v'

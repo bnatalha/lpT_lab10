@@ -2,10 +2,9 @@
 ###### por [Natália Azevedo de Brito](https://github.com/bnatalha)
 
 Este programa contem:
-- Algoritmos de ordenação para arrays;
-- TAD's pilha, fila, deque e lista*;
-- Testes para todos métodos do namespace edb1.
-*(exceções não foram implementadas)
+- Algoritmos de ordenação crescente para arrays;
+- TAD's pilha, fila, deque e lista implementadas com suas devidas exceções;
+- Testes para todos os métodos do namespace edb1.
 
 ### Compilando:
 ###### para linux:
@@ -14,7 +13,7 @@ Este programa contem:
 
 ###### para windows (com MinGW)
 
-`$ make linux`
+`$ make windows`
 
 ### Gerando documentação:
 

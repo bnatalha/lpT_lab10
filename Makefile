@@ -13,7 +13,7 @@ EXP_LIB =-l stdexcept
 
 # Compilation flags
 #CPPFLAGS += -Wall -ansi -std=c++11 -pedantic -O0 -g -I $(INC_DIR) -I. -I include/lista -l <stdexcept>
-CPPFLAGS += -Wall -ansi -std=c++11 -pedantic -O0 -g -I $(INC_DIR) -I. -I include/lista
+CPPFLAGS += -Wall -ansi -std=c++11 -pedantic -O0 -g -I $(INC_DIR) -I.
 
 # Compilators
 CC =g++
@@ -27,10 +27,10 @@ AR =ar
 .PHONY: windows linux init val clean docs
 #.PHONY: linux init val clean docs
 
-# Generates the necessary filse for this library to run on a (Debian based) linux system
+# Generates the necessary files for this library to run on a (Debian based) linux system
 linux: init natalia.a natalia.so prog_estatico prog_dinamico
 
-# Generates the necessary filse for this library to run on a windows system with MinGW
+# Generates the necessary files for this library to run on a windows system with MinGW
 windows: init natalia.lib natalia.dll prog_estatico prog_dinamico
 
 # Creates the 'build' and the 'lib' folder at the current directory if there's no other folder with this name on it.
